@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AImazing AI · Marten Rößler</title>
+<!-- Richtung E "Poster", Fassung 1 (11.09.2026, nach Martens Auswahl): helles Papier, Schweizer Raster,
+     1px schwarze Linien, 0px Ecken, Schrift in Viewport-Groesse, Lime als Farbflaeche und Textmarker.
+     Neu: Foto sitzt mittig auf dem Lime-Block, dunkle Leiste beim Scrollen mit Email-Profit-X-Button,
+     Claude-Kasten (getippte Zeile) in Punkt 02, staerkere Copy. E1/E2/E3 unterscheiden sich nur in
+     Headline und Claude-Zeile von Punkt 02. -->
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{ --paper:#F2F1EA; --ink:#0B0B0B; --mute:#5B5B55; --rule:#0B0B0B; --lime:#C9E266; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-variation-settings:"wdth" 100}
+  body{padding-block:0 60px;padding-inline:16px}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .wrap{max-width:480px;margin:0 auto}
+  mark{background:var(--lime);color:var(--ink);padding:0 .08em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+  /* Dunkle Leiste, erscheint beim Scrollen */
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:20;background:var(--ink);color:var(--paper);transform:translateY(-100%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  body.scrolled .topbar{transform:translateY(0)}
+  .topbar .in{max-width:480px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:8px}
+  .topbar .ic{width:34px;height:34px;display:grid;place-items:center;color:var(--paper);border:1px solid #2A2A2A;transition:border-color .2s}
+  .topbar .ic:hover{border-color:var(--lime)}
+  .topbar .ic svg{width:15px;height:15px;fill:currentColor}
+  .topbar .sp{flex:1}
+  .topbar .go{display:flex;align-items:center;gap:10px;height:34px;padding:0 12px 0 14px;background:var(--lime);color:var(--ink);text-decoration:none;font-weight:700;font-size:13px;font-variation-settings:"wdth" 90;transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+  .topbar .go:hover{transform:translateX(2px)}
+  .topbar .go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+  .top{display:flex;justify-content:space-between;align-items:center;height:48px;border-bottom:1px solid var(--rule);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+  .top a{color:var(--ink);text-decoration:none;margin-left:16px}
+  .top a:hover{background:var(--lime)}
+  .top b{font-weight:500}
+  .head{padding:26px 0 0}
+  h1{font-weight:800;font-variation-settings:"wdth" 70;text-transform:uppercase;font-size:clamp(46px,13.2vw,62px);line-height:.9;letter-spacing:-.02em;margin:0;word-spacing:.02em}
+  h1 mark{padding:0 .06em}
+  .benefit{margin:18px 0 0;font-size:17px;line-height:1.35;font-weight:500}
+  .person{display:grid;grid-template-columns:104px 1fr;gap:18px;align-items:center;margin:26px 0 0;padding:18px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  /* Foto: gebackenes Bild (Person freigestellt, Claude-Logo in Claude-Farben dahinter), siehe img/marten-claude-*.webp */
+  .ph{position:relative;width:104px;height:104px;background:transparent;overflow:hidden}
+  .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .person .n{font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 6px}
+  .person p{margin:0;font-size:15px;line-height:1.4;color:var(--mute)}
+
+  .sec{display:grid;grid-template-columns:56px 1fr;border-bottom:1px solid var(--rule);padding:22px 0 26px}
+  .sec>div{min-width:0}
+  .sec .no{font-weight:800;font-size:40px;line-height:.85;font-variation-settings:"wdth" 62;letter-spacing:-.02em}
+  .sec .tag{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px;color:var(--mute)}
+  .sec .tag.big{font-size:13px;color:var(--ink);font-weight:500;letter-spacing:.04em;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .sec .tag.big mark{font-weight:700;padding:1px 6px}
+  h2{font-weight:700;font-variation-settings:"wdth" 82;font-size:26px;line-height:1;letter-spacing:-.02em;margin:0 0 10px}
+  h2.xl{font-size:30px}
+  .sec p{margin:0;font-size:15px;line-height:1.5;color:var(--mute)}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);margin:18px 0;border:1px solid var(--rule)}
+  .facts div{padding:10px 8px}
+  .facts div+div{border-left:1px solid var(--rule)}
+  .facts b{display:block;font-weight:800;font-variation-settings:"wdth" 70;font-size:24px;line-height:1;letter-spacing:-.02em}
+  .facts span{display:block;font-size:10.5px;color:var(--mute);margin-top:5px;line-height:1.3}
+  .bar{display:flex;justify-content:space-between;align-items:center;height:56px;padding:0 16px;background:var(--ink);color:var(--lime);font-weight:700;font-size:15px;text-decoration:none;border:1px solid var(--ink);transition:background .2s,color .2s;width:100%;cursor:pointer;font-family:inherit;font-variation-settings:"wdth" 90}
+  .bar:hover{background:var(--lime);color:var(--ink)}
+  .bar.lime{background:var(--lime);color:var(--ink)}
+  .bar.lime:hover{background:var(--ink);color:var(--lime)}
+  .bar.line{background:transparent;color:var(--ink)}
+  .bar.line:hover{background:var(--ink);color:var(--lime)}
+  .bar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  ul.pl{list-style:none;margin:10px 0 0;padding:0;counter-reset:li}
+  ul.pl li{display:grid;grid-template-columns:22px 1fr;gap:6px;padding:8px 0;font-size:15px;line-height:1.4;border-top:1px solid #D8D6CB}
+  ul.pl li:first-child{border-top:0}
+  ul.pl li::before{content:counter(li,decimal-leading-zero);counter-increment:li;font-family:"IBM Plex Mono",monospace;font-size:11px;padding-top:3px}
+  ul.pl.tight li{padding:7px 0;font-size:14.5px}
+
+  /* Claude-Kasten */
+  .claude{margin:14px 0 4px;background:var(--ink);color:var(--lime);padding:12px 14px;font-size:12px;display:flex;gap:8px;align-items:baseline;overflow:hidden;min-width:0}
+  .claude>span{min-width:0}
+  .claude .t{display:inline-block;overflow:hidden;white-space:nowrap;border-right:2px solid var(--lime);width:0;animation:type 2.4s steps(44) .5s forwards,caret .9s steps(2) infinite;vertical-align:bottom;max-width:100%}
+  @keyframes type{to{width:44ch}}
+  @keyframes caret{50%{border-color:transparent}}
+  .claude .done{color:var(--paper);opacity:0;animation:show .3s 3.1s forwards;margin-left:auto;white-space:nowrap;flex:0 0 auto}
+  @keyframes show{to{opacity:1}}
+
+  .hint{margin:16px 0 4px;font-size:13.5px;color:var(--ink)}
+  .form{display:grid;gap:0;margin-top:6px;border-top:1px solid var(--rule)}
+  .form input{height:50px;border:0;border-bottom:1px solid var(--rule);background:transparent;color:var(--ink);padding:0 2px;font:inherit;font-size:16px;outline:none;border-radius:0}
+  .form input:focus{background:#fff}
+  .form input::placeholder{color:#8A8980;text-transform:uppercase;font-size:12px;letter-spacing:.06em;font-family:"IBM Plex Mono",monospace}
+  .form .bar{margin-top:14px}
+  .status{font-size:12px;min-height:1em;margin-top:8px}
+  .status.ok{color:#3E6B00} .status.err{color:#B3261E}
+  .about{display:grid;grid-template-columns:56px 1fr;padding:22px 0 0}
+  .about .l{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding-top:3px}
+  .about p{margin:0;font-size:14px;line-height:1.55;color:var(--mute)}
+  footer{margin-top:40px;border-top:1px solid var(--rule);padding-top:12px;display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+  footer a{color:var(--ink);text-decoration:none;margin-left:14px}
+  @media (prefers-reduced-motion:reduce){.claude .t{animation:none;width:auto;border-right:0}.claude .done{animation:none;opacity:1}}
+</style>
+</head>
+<body>
+  <div class="topbar"><div class="in">
+    <a class="ic" href="https://www.tiktok.com/@aimazingai" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></a>
+    <a class="ic" href="https://www.instagram.com/aimazingai/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
+    <span class="sp"></span>
+    <a class="go" href="https://emailprofitx.com" target="_blank" rel="noopener">Email Profit X <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  </div></div>
+
+<div class="wrap">
+  <div class="top mono"><b>AImazing AI</b><span><a href="https://www.tiktok.com/@aimazingai" target="_blank" rel="noopener">TikTok ↗</a><a href="https://www.instagram.com/aimazingai/" target="_blank" rel="noopener">Instagram ↗</a></span></div>
+
+  <header class="head" id="head">
+    <h1>Content und Marketing, <mark>mit Claude</mark> automatisiert.</h1>
+    <p class="benefit">Für Selbstständige, Creator und Marketing-Teams ohne technische Vorerfahrung. Du erledigst in Stunden, wofür du sonst Wochen oder eine Agentur gebraucht hast.</p>
+    <div class="person">
+      <div class="ph"><img src="img/marten-claude-icon-b.webp" alt="Marten Rößler"></div>
+      <div>
+        <p class="n mono">Marten Rößler</p>
+        <p>Ich zeige dir, wie KI dir oder deinem Team im Marketing und bei der Content-Erstellung so viel Arbeit abnimmt und Kosten spart, dass mehr Zeit für das Wesentliche bleibt.</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="sec">
+      <div class="no">01</div>
+      <div>
+        <p class="tag mono">Email Profit X · E-Commerce E-Mail-Automatisierung</p>
+        <h2>Ersetze <mark>teure E-Mail-Agenturen.</mark> Mit Claude und Klaviyo.</h2>
+        <p>E-Mail-Automation für Shopify und Klaviyo. Ein erprobtes System aus über 20 Marken.</p>
+        <ul class="pl tight">
+          <li>10 erprobte Flows und 50 Automationen, die in jedem Shop am meisten Umsatz bringen. Vorbereitet für Klaviyo.</li>
+          <li>Texte in deiner Markenstimme, Designs passend zu deiner Brand. Ohne dass es nach KI klingt oder aussieht.</li>
+          <li>Claude plant die Strategie, schreibt, designt und richtet ein. In Tagen statt Monaten.</li>
+        </ul>
+        <div class="facts">
+          <div><b>10 Mio.+</b><span>Kampagnen und Flows versendet</span></div>
+          <div><b>20+</b><span>Marken betreut</span></div>
+          <div><b>7,5 Mio. €</b><span>Umsatz für unsere Kunden</span></div>
+        </div>
+        <a class="bar" href="https://emailprofitx.com" target="_blank" rel="noopener">Zu Email Profit X <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+    </section>
+
+    <section class="sec" id="warteliste">
+      <div class="no">02</div>
+      <div>
+        <p class="tag big mono"><span>Content-Automation mit Claude</span><mark>bald</mark></p>
+        <h2 class="xl">Du redest. <mark>Claude schneidet.</mark> Kein CapCut und Co. mehr.</h2>
+        <div class="claude mono"><span>&gt;</span><span><span class="t">claude, schneide das Video und bau 12 Shorts</span></span></div>
+        <ul class="pl">
+          <li>Du sagst, was du willst. Claude schneidet: Pausen raus, Zooms rein, Captions drauf. Kein Schnittprogramm.</li>
+          <li>Shorts in Masse, in deinem Design. Kein KI-Einheitsbrei.</li>
+          <li>Virale Konzepte deiner Konkurrenz automatisch recherchieren, zerlegen und für deine Marke anpassen.</li>
+          <li>Ein Ordner rein, fertige Clips raus.</li>
+        </ul>
+        <p class="hint">Trag dich ein, du erfährst als Erster, wenn es startet, und bekommst WhisperM sofort.</p>
+        <form class="form" data-signup>
+          <input type="text" name="first_name" placeholder="Vorname" autocomplete="given-name" required>
+          <input type="email" name="email" placeholder="E-Mail-Adresse" autocomplete="email" required>
+          <button class="bar" type="submit">Auf die Warteliste <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+          <div class="status mono" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="no">03</div>
+      <div>
+        <p class="tag big mono"><span>Mein Geschenk an dich</span><mark>gratis</mark></p>
+        <h2>WhisperM. <mark>Diktieren statt tippen.</mark></h2>
+        <p>Meine eigene Version von Wispr Flow, ohne Abo. Du zahlst nur, was du diktierst: bei mir waren das über 200.000 Wörter in sechs Wochen für rund 4,60 Dollar. Läuft es lokal auf deinem Rechner, kostet es gar nichts.</p>
+        <ul class="pl">
+          <li>Einfache Installation: Ordner in Claude Code ziehen, „Los geht’s“ schreiben, Claude richtet alles ein.</li>
+          <li>Versteht dutzende Sprachen, dank des Sprachmodells von OpenAI. Flüstern geht auch.</li>
+          <li>Passt deinen Text in Sekunden an deinen Stil an, locker für WhatsApp, formell für E-Mails.</li>
+          <li>Mit Historie, damit kein Diktat verloren geht, und einem eigenen Menü, das du jederzeit frei anpassen kannst.</li>
+        </ul>
+        <a class="bar" href="#warteliste" style="margin-top:16px">WhisperM gratis holen <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="no">04</div>
+      <div>
+        <p class="tag mono">Kooperationen</p>
+        <h2>Brand Deals und <mark>Kooperationen.</mark></h2>
+        <p>Du hast ein Tool oder ein Produkt, das zu Shop-Betreibern, Creatorn oder KI-Anwendern passt? Dann freue ich mich, von dir zu hören. Erzähl mir kurz, was du machst und was du dir vorstellst, und ich melde mich innerhalb von zwei Tagen zurück.</p>
+        <a class="bar" href="mailto:marten.r@aimazingai.de?subject=Kooperation%20mit%20AImazing%20AI" style="margin-top:16px">Anfrage schicken <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="l mono">Über mich</div>
+      <p>Ich habe zuerst eine Facebook-Performance-Agentur geführt, mit Werbebudgets von bis zu 40.000 Euro im Monat pro Kunde. Danach kam meine E-Mail-Marketing-Agentur: über 20 erfolgreiche Marken, über 7,5 Millionen Euro Umsatz für unsere Kunden, über 10 Millionen versendete Kampagnen und Flows. Aus diesem Wissen ist Email Profit X entstanden, ein digitales Produkt, bei dem Claude Code die Strategie plant, die Mails schreibt, programmiert, designt und in Klaviyo einrichtet. Was früher Wochen gedauert hat, dauert damit Stunden. Heute helfe ich Selbstständigen, Creatorn und Marketing-Teams, ihr Marketing und ihren Content mit KI viel einfacher zu machen.</p>
+    </section>
+  </main>
+
+  <footer class="mono"><span>© 2026 AImazing AI</span><span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span></footer>
+</div>
+<script>
+  // Dunkle Leiste, sobald der Kopf aus dem Bild ist
+  const head = document.getElementById('head');
+  if (new URLSearchParams(location.search).has('bar')) document.body.classList.add('scrolled');
+  else new IntersectionObserver(([e]) => document.body.classList.toggle('scrolled', !e.isIntersecting), { threshold: 0 }).observe(head);
+
+  const KLAVIYO = { company: 'Rmdur8', list: 'RGjKR4' };
+  document.querySelector('[data-signup]').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = e.target, st = f.querySelector('.status'), btn = f.querySelector('button');
+    const email = f.email.value.trim(), first_name = f.first_name.value.trim();
+    st.className = 'status mono'; st.textContent = 'Einen Moment …'; btn.disabled = true;
+    try {
+      const r = await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO.company, {
+        method: 'POST', headers: { 'Content-Type': 'application/vnd.api+json', 'revision': '2024-10-15' },
+        body: JSON.stringify({ data: { type: 'subscription', attributes: { custom_source: 'Amazing AI Store',
+          profile: { data: { type: 'profile', attributes: { email, first_name } } } },
+          relationships: { list: { data: { type: 'list', id: KLAVIYO.list } } } } })
+      });
+      if (r.status === 202) { st.className = 'status mono ok'; st.textContent = 'Fast geschafft: bitte den Link in der Bestätigungsmail klicken.'; f.reset(); }
+      else throw new Error(r.status);
+    } catch (err) {
+      st.className = 'status mono err'; st.innerHTML = 'Das hat nicht geklappt. Schreib mir kurz: <a href="mailto:marten.r@aimazingai.de?subject=Warteliste" style="color:inherit">marten.r@aimazingai.de</a>';
+    } finally { btn.disabled = false; }
+  });
+</script>
+</body>
+</html>
