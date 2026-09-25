@@ -197,7 +197,7 @@
     </section>
   </main>
 
-  <footer class="mono"><span>© 2026 AImazing AI</span><span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span></footer>
+  <footer class="mono"><span>© 2026 AImazing AI</span><span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="#" data-consent-open>Cookies</a></span></footer>
 </div>
 <script>
   // Dunkle Leiste, sobald der Kopf aus dem Bild ist
@@ -218,12 +218,15 @@
           profile: { data: { type: 'profile', attributes: { email, first_name } } } },
           relationships: { list: { data: { type: 'list', id: KLAVIYO.list } } } } })
       });
-      if (r.status === 202) { st.className = 'status mono ok'; st.textContent = 'Fast geschafft: bitte den Link in der Bestätigungsmail klicken.'; f.reset(); }
+      if (r.status === 202) { if (window.fbq) fbq('track', 'Lead'); st.className = 'status mono ok'; st.textContent = 'Fast geschafft: bitte den Link in der Bestätigungsmail klicken.'; f.reset(); }
       else throw new Error(r.status);
     } catch (err) {
       st.className = 'status mono err'; st.innerHTML = 'Das hat nicht geklappt. Schreib mir kurz: <a href="mailto:marten.r@aimazingai.de?subject=Warteliste" style="color:inherit">marten.r@aimazingai.de</a>';
     } finally { btn.disabled = false; }
   });
 </script>
+<!-- Cookie-Einwilligung: Pixel-ID eintragen, sobald vorhanden. Leer = Meta Pixel wird nie geladen. -->
+<script>window.META_PIXEL_ID = '';</script>
+<script src="consent.js"></script>
 </body>
 </html>
