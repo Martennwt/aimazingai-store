@@ -11,7 +11,7 @@
  * Datenschutzerklaerung ergaenzen. Pixel-ID leer = Dienst wird angezeigt, aber nie geladen.
  */
 (function () {
-  var VERSION = 1;
+  var VERSION = 2; // 2 = YouTube-Kategorie dazu (25.09.2026)
   var KEY = 'aimazing-consent';
   var MAX_MS = 365 * 24 * 3600 * 1000;
 
@@ -28,8 +28,33 @@
         window.fbq('init', id);
         window.fbq('track', 'PageView');
       }
+    },
+    medien: {
+      titel: 'Externe Videos',
+      text: 'YouTube (Google Ireland): spielt Videos direkt auf dieser Seite ab. Beim Laden kann YouTube Cookies setzen und Daten in die USA übertragen. Ohne Okay siehst du nur ein Vorschaufeld.',
+      laden: function () { videos(); }
     }
   };
+
+  // YouTube-Einbettungen: <div class="yt-embed" data-yt="VIDEO-ID"></div>. Ohne Einwilligung nur ein Platzhalter,
+  // Klick auf "Video abspielen" erteilt die Einwilligung fuer "medien" und laedt das Video (youtube-nocookie.com).
+  function videos() {
+    var an = !!(window.aiConsent && window.aiConsent.medien);
+    document.querySelectorAll('.yt-embed').forEach(function (v) {
+      var id = v.getAttribute('data-yt');
+      if (an && v.getAttribute('data-geladen') !== '1') {
+        v.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0&autoplay=' + (v.getAttribute('data-autoplay') === '1' ? 1 : 0) + '" title="Video" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>';
+        v.setAttribute('data-geladen', '1');
+      } else if (!an) {
+        v.setAttribute('data-geladen', '0');
+        // Vorschaubild liegt LOKAL unter /video/yt-<ID>.webp (einmal von i.ytimg.com geholt), damit vor dem Okay
+        // keine Verbindung zu Google entsteht. Neues Video: Bild nach entwuerfe/video/ legen, build-live kopiert es.
+        v.style.backgroundImage = 'url(/video/yt-' + id + '.webp)';
+        v.innerHTML = '<button type="button" class="yt-ph" data-yt-start><span class="yt-play"></span><b>Video abspielen</b>' +
+          '<small>Beim Abspielen lädt YouTube (Google) und kann Cookies setzen. <a href="/datenschutz.html#youtube">Mehr dazu</a></small></button>';
+      }
+    });
+  }
 
   function lesen() {
     try {
@@ -47,6 +72,7 @@
   function anwenden(c) {
     window.aiConsent = c ? c.wahl : {};
     Object.keys(DIENSTE).forEach(function (k) { if (c && c.wahl[k]) DIENSTE[k].laden(); });
+    videos();
   }
 
   var CSS = '' +
@@ -75,6 +101,14 @@
     '.ck-sw[aria-checked="true"]::after{transform:translateX(20px)}' +
     '.ck-sw[disabled]{cursor:default;opacity:.55}' +
     '.ck[hidden]{display:none!important}' +
+    '.yt-embed{position:relative;aspect-ratio:16/9;width:100%;background:#111 center/cover no-repeat;overflow:hidden}' +
+    '.yt-ph{position:absolute;inset:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.6));color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6);cursor:pointer;font-family:inherit;padding:16px;text-align:center}' +
+    '.yt-ph b{font-size:17px}' +
+    '.yt-ph small{font-size:12px;opacity:.85;max-width:34ch;line-height:1.4}' +
+    '.yt-ph small a{color:inherit}' +
+    '.yt-play{width:68px;height:68px;border-radius:50%;background:#C9E266;position:relative;transition:transform .25s cubic-bezier(.2,.8,.2,1)}' +
+    '.yt-play::after{content:"";position:absolute;left:27px;top:21px;border-left:20px solid #0B0B0B;border-top:13px solid transparent;border-bottom:13px solid transparent}' +
+    '.yt-ph:hover .yt-play{transform:scale(1.08)}' +
     '@media (prefers-reduced-motion:reduce){.ck-box,.ck-sw::after{transition:none}}';
 
   var el, ansicht = 'kurz';
@@ -104,7 +138,7 @@
     var wahl = c ? c.wahl : {};
     var h = '<div class="ck-box"><div class="ck-kopf"><span>Cookies</span><mark>deine Wahl</mark></div><div class="ck-in">' +
       '<h2 id="ck-t">Hilfst du mir, die richtigen Leute zu erreichen?</h2>' +
-      '<p>Mit deinem Okay sehe ich über den Meta Pixel, welche meiner Anzeigen dich hergebracht haben. So landet mein Werbebudget bei Leuten, für die das hier wirklich passt. Ohne Okay funktioniert die Seite genauso, ändern kannst du das jederzeit unten auf der Seite. Mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>';
+      '<p>Mit deinem Okay sehe ich über den Meta Pixel, welche meiner Anzeigen dich hergebracht haben, und Videos von YouTube laufen direkt hier. So landet mein Werbebudget bei Leuten, für die das hier wirklich passt. Ohne Okay funktioniert die Seite genauso, ändern kannst du das jederzeit unten auf der Seite. Mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>';
     if (ansicht === 'lang') {
       h += '<div class="ck-liste"><div class="ck-kat"><b>Notwendig</b><button class="ck-sw" role="switch" aria-checked="true" disabled aria-label="Notwendig, immer an"></button>' +
         '<p>Speichert nur deine Auswahl hier im Browser. Ohne diesen Eintrag würde der Banner bei jedem Besuch wieder auftauchen.</p></div>';
@@ -134,6 +168,15 @@
     if (p.has('cookies')) oeffnen(p.get('cookies') === 'lang');
     else if (!c) oeffnen(false);
     document.addEventListener('click', function (e) {
+      var y = e.target.closest('[data-yt-start]');
+      if (y && !e.target.closest('a')) {
+        var alt = (lesen() || {}).wahl || {}, w = {};
+        Object.keys(DIENSTE).forEach(function (k) { w[k] = !!alt[k]; });
+        w.medien = true;
+        y.closest('.yt-embed').setAttribute('data-autoplay', '1');
+        schreiben(w); if (!el.hidden) schliessen();
+        return;
+      }
       var a = e.target.closest('[data-consent-open]');
       if (a) { e.preventDefault(); oeffnen(true); }
     });
