@@ -103,8 +103,8 @@
   function zeichnen(c) {
     var wahl = c ? c.wahl : {};
     var h = '<div class="ck-box"><div class="ck-kopf"><span>Cookies</span><mark>deine Wahl</mark></div><div class="ck-in">' +
-      '<h2 id="ck-t">Darf ich messen, was Werbung bringt?</h2>' +
-      '<p>Mit deiner Zustimmung lade ich den Meta Pixel. Ohne Zustimmung läuft hier nichts davon, die Seite funktioniert genauso. Du kannst deine Wahl jederzeit unten auf der Seite ändern. Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>';
+      '<h2 id="ck-t">Hilfst du mir, die richtigen Leute zu erreichen?</h2>' +
+      '<p>Mit deinem Okay sehe ich über den Meta Pixel, welche meiner Anzeigen dich hergebracht haben. So landet mein Werbebudget bei Leuten, für die das hier wirklich passt. Ohne Okay funktioniert die Seite genauso, ändern kannst du das jederzeit unten auf der Seite. Mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>';
     if (ansicht === 'lang') {
       h += '<div class="ck-liste"><div class="ck-kat"><b>Notwendig</b><button class="ck-sw" role="switch" aria-checked="true" disabled aria-label="Notwendig, immer an"></button>' +
         '<p>Speichert nur deine Auswahl hier im Browser. Ohne diesen Eintrag würde der Banner bei jedem Besuch wieder auftauchen.</p></div>';
@@ -113,7 +113,7 @@
       });
       h += '</div></div><div class="ck-row"><button class="ck-b" data-ck="keine">Alle ablehnen</button><button class="ck-b" data-ck="speichern">Auswahl speichern</button></div></div>';
     } else {
-      h += '</div><div class="ck-row"><button class="ck-b" data-ck="keine">Ablehnen</button><button class="ck-b" data-ck="alle">Zustimmen</button></div>' +
+      h += '</div><div class="ck-row"><button class="ck-b" data-ck="keine">Nein, danke</button><button class="ck-b" data-ck="alle">Okay, gern</button></div>' +
         '<button class="ck-mehr" data-ck="mehr">Einstellungen</button></div>';
     }
     el.innerHTML = h;
