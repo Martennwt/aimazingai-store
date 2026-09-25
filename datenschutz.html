@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datenschutz · AImazing AI</title>
+<!-- ENTWURF (erstellt 25.09.2026), keine Rechtsberatung. Optik im Stil von e1-poster.html
+     (helles Papier, 1px schwarze Linien, Archivo/IBM Plex Mono, Lime als Markerfarbe).
+     Angaben am 25.09.2026 von Marten bestaetigt (Kleinunternehmer, Anschrift Hamburg, kein Telefon),
+     nichts wurde erfunden. Der Abschnitt "Google Fonts" beschreibt den JETZIGEN Code-Stand
+     (dynamisches Laden von fonts.googleapis.com). Sobald die Schriften lokal eingebunden werden
+     (siehe CHECKLISTE.md), kann dieser Abschnitt ersatzlos geloescht werden. -->
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{ --paper:#F2F1EA; --ink:#0B0B0B; --mute:#5B5B55; --rule:#0B0B0B; --lime:#C9E266; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-variation-settings:"wdth" 100}
+  body{padding-block:0 60px;padding-inline:16px}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .wrap{max-width:640px;margin:0 auto}
+  mark{background:var(--lime);color:var(--ink);padding:0 .08em}
+  .top{display:flex;justify-content:space-between;align-items:center;height:48px;border-bottom:1px solid var(--rule);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+  .top a{color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:6px}
+  .top a:hover{background:var(--lime)}
+  .top b{font-weight:500}
+  h1{font-weight:800;font-variation-settings:"wdth" 70;text-transform:uppercase;font-size:clamp(34px,9vw,46px);line-height:.95;letter-spacing:-.02em;margin:30px 0 8px}
+  .lead{font-size:13px;color:var(--mute);margin:0 0 8px}
+  .stand{font-size:11.5px;color:var(--mute);margin:0 0 28px;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+  .toc{background:#fff;border:1px solid var(--rule);padding:14px 16px;margin:0 0 28px;font-size:13px;line-height:1.7}
+  .toc b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin-bottom:6px;font-family:"IBM Plex Mono",monospace}
+  .toc a{color:var(--ink)}
+  .toc ol{margin:0;padding-left:18px}
+  .no{font-weight:800;font-size:34px;line-height:.85;font-variation-settings:"wdth" 62;letter-spacing:-.02em;display:block;margin-bottom:2px}
+  section{display:grid;grid-template-columns:44px 1fr;gap:0 16px;padding:22px 0;border-top:1px solid var(--rule)}
+  section:first-of-type{border-top:0;padding-top:0}
+  section>div{min-width:0}
+  h2{font-weight:700;font-variation-settings:"wdth" 82;font-size:19px;letter-spacing:-.01em;margin:0 0 12px}
+  h3{font-weight:700;font-size:12px;margin:18px 0 8px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+  h3:first-child{margin-top:0}
+  p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+  p:last-child{margin-bottom:0}
+  a{color:var(--ink);word-break:break-word}
+  ul{margin:0 0 12px;padding-left:18px;font-size:14.5px;line-height:1.6}
+  li{margin-bottom:5px}
+  .fact{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;font-size:14.5px;line-height:1.6;margin-bottom:10px}
+  .fact dt{color:var(--mute)}
+  .fact dd{margin:0}
+  .ph{background:var(--lime);color:var(--ink);font-weight:700;padding:1px 6px;display:inline-block;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .note{background:#fff;border:1px solid var(--rule);padding:12px 14px;font-size:13px;line-height:1.55;margin:12px 0}
+  .note b{font-family:"IBM Plex Mono",monospace;font-weight:500;text-transform:uppercase;font-size:10.5px;letter-spacing:.05em;color:var(--mute);display:block;margin-bottom:4px}
+  footer{margin-top:40px;border-top:1px solid var(--rule);padding-top:12px;display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+  footer a{color:var(--ink);text-decoration:none;margin-left:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top mono">
+    <a href="index.html">&larr; Zur&uuml;ck zu AImazing AI</a>
+    <b>aimazingai.de</b>
+  </div>
+
+  <h1>Datenschutz</h1>
+  <p class="lead mono">Datenschutzerkl&auml;rung gem&auml;&szlig; Art. 13/14 DSGVO</p>
+
+  <div class="toc mono">
+    <b>Inhalt</b>
+    <ol>
+      <li><a href="#verantwortlicher">Verantwortlicher</a></li>
+      <li><a href="#rechte">Ihre Rechte</a></li>
+      <li><a href="#hosting">Hosting (GitHub Pages)</a></li>
+      <li><a href="#domain">Domain (Hostinger)</a></li>
+      <li><a href="#cookies">Cookies und Tracking</a></li>
+      <li><a href="#fonts">Schriftarten</a></li>
+      <li><a href="#warteliste">Warteliste (Klaviyo)</a></li>
+      <li><a href="#ki">KI-Werkzeuge bei der Verwaltung</a></li>
+      <li><a href="#kontakt">Kontaktaufnahme per E-Mail</a></li>
+      <li><a href="#drittland">Datenweitergabe in die USA</a></li>
+    </ol>
+  </div>
+
+  <section id="verantwortlicher">
+    <div><span class="no">01</span></div>
+    <div>
+      <h2>Verantwortlicher</h2>
+      <p>Verantwortlich f&uuml;r die Datenverarbeitung auf dieser Website ist:</p>
+      <dl class="fact">
+        <dt>Name</dt><dd>Marten R&ouml;&szlig;ler, AImazing AI</dd>
+        <dt>Anschrift</dt><dd>Schmalenbecker Str. 16<br>22763 Hamburg</dd>
+        <dt>E-Mail</dt><dd><a href="mailto:marten.r@aimazingai.de">marten.r@aimazingai.de</a></dd>
+      </dl>
+      <p>Verantwortlicher ist die nat&uuml;rliche oder juristische Person, die allein oder gemeinsam mit anderen &uuml;ber die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
+    </div>
+  </section>
+
+  <section id="rechte">
+    <div><span class="no">02</span></div>
+    <div>
+      <h2>Ihre Rechte</h2>
+      <p>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft &uuml;ber Ihre gespeicherten personenbezogenen Daten, deren Herkunft, Empf&auml;nger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung, Einschr&auml;nkung oder L&ouml;schung dieser Daten. Au&szlig;erdem steht Ihnen ein Recht auf Daten&uuml;bertragbarkeit sowie ein Widerspruchsrecht gegen bestimmte Verarbeitungen (Art. 21 DSGVO) zu. Hierzu sowie zu weiteren Fragen k&ouml;nnen Sie sich jederzeit unter der oben genannten Adresse an uns wenden.</p>
+      <p>Erteilte Einwilligungen (z.&nbsp;B. zur Warteliste) k&ouml;nnen Sie jederzeit mit Wirkung f&uuml;r die Zukunft widerrufen, etwa &uuml;ber den Abmeldelink in jeder E-Mail.</p>
+      <p>Zudem steht Ihnen ein Beschwerderecht bei einer Datenschutz-Aufsichtsbeh&ouml;rde zu, insbesondere in dem Mitgliedstaat Ihres gew&ouml;hnlichen Aufenthalts, Ihres Arbeitsplatzes oder des Orts des mutma&szlig;lichen Versto&szlig;es.</p>
+      <p>Zust&auml;ndige Aufsichtsbeh&ouml;rde: Der Hamburgische Beauftragte f&uuml;r Datenschutz und Informationsfreiheit, Ludwig-Erhard-Str. 22, 20459 Hamburg.</p>
+    </div>
+  </section>
+
+  <section id="hosting">
+    <div><span class="no">03</span></div>
+    <div>
+      <h2>Hosting bei GitHub Pages</h2>
+      <p>Diese Website wird als statische Seite &uuml;ber GitHub Pages gehostet, ein Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA (Teil von Microsoft). Es gibt keinen eigenen Server und kein Login, die Seite besteht nur aus HTML-, CSS- und Bilddateien.</p>
+      <p>Beim Aufruf der Seite verarbeitet GitHub technisch notwendig Server-Log-Daten, unter anderem IP-Adresse, Datum und Uhrzeit der Anfrage, aufgerufene Datei und verwendeter Browser. Das erfolgt auf Grundlage unseres berechtigten Interesses an einer sicheren und funktionierenden Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO). N&auml;here Angaben macht GitHub in der eigenen Datenschutzerkl&auml;rung: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">docs.github.com/.../github-general-privacy-statement</a>.</p>
+      <p>GitHub hat sich nach eigenen Angaben dem EU-U.S. Data Privacy Framework (DPF) unterworfen, das als Grundlage f&uuml;r die Daten&uuml;bermittlung in die USA dient; erg&auml;nzend werden EU-Standardvertragsklauseln eingesetzt.</p>
+    </div>
+  </section>
+
+  <section id="domain">
+    <div><span class="no">04</span></div>
+    <div>
+      <h2>Domain bei Hostinger</h2>
+      <p>Die Domain aimazingai.de ist bei Hostinger registriert (Hostinger, betrieben u.&nbsp;a. &uuml;ber Hostinger International Ltd. bzw. verbundene Unternehmen). Hostinger verwaltet dabei die Registrierungs- und Kontaktdaten der Domain (Inhaberdaten) sowie die DNS-Aufl&ouml;sung, &uuml;ber die Ihr Browser die Adresse aimazingai.de dem Server bei GitHub zuordnet. Hostinger selbst liefert keine Inhalte dieser Website aus und erh&auml;lt dabei keine Daten der Websitebesucher, mit Ausnahme der technisch notwendigen DNS-Anfrage.</p>
+      <p>Die Inhaberdaten der Domain sind die Daten des Verantwortlichen (siehe Abschnitt 1), nicht die der Websitebesucher.</p>
+    </div>
+  </section>
+
+  <section id="cookies">
+    <div><span class="no">05</span></div>
+    <div>
+      <h2>Cookies und Tracking</h2>
+      <p>Diese Website setzt nach aktuellem Stand des Codes selbst keine Cookies und bindet kein Analyse- oder Tracking-Werkzeug ein (kein Google Analytics, kein Meta-/TikTok-Pixel, keine Heatmap- oder A/B-Testing-Tools). Es findet keine Auswertung des Nutzerverhaltens auf dieser Seite statt.</p>
+      <p>Die einzigen externen Verbindungen, die beim Aufruf der Seite automatisch aufgebaut werden, ist, nur beim aktiven Absenden des Wartelisten-Formulars, die Verbindung zu Klaviyo (siehe Abschnitt 7). Die Schriftarten liegen auf dieser Website selbst (siehe Abschnitt 6). Die Links zu TikTok und Instagram sind einfache Verweise; solange Sie nicht aktiv darauf klicken, wird keine Verbindung zu diesen Diensten aufgebaut.</p>
+    </div>
+  </section>
+
+  <section id="fonts">
+    <div><span class="no">06</span></div>
+    <div>
+      <h2>Schriftarten</h2>
+      <p>Die Schriftarten &bdquo;Archivo&ldquo; und &bdquo;IBM Plex Mono&ldquo; werden lokal von dieser Website ausgeliefert. Beim Aufruf der Seite wird dazu keine Verbindung zu Google oder anderen Schrift-Anbietern aufgebaut.</p>
+    </div>
+  </section>
+
+  <section id="warteliste">
+    <div><span class="no">07</span></div>
+    <div>
+      <h2>Warteliste und Gratis-Download (Klaviyo)</h2>
+      <p>Wenn Sie sich &uuml;ber das Formular auf dieser Seite f&uuml;r die Warteliste eintragen, werden Ihr Vorname und Ihre E-Mail-Adresse per JavaScript direkt aus Ihrem Browser an die Klaviyo Client-API &uuml;bertragen, ohne &uuml;ber einen eigenen Server zu laufen. Anbieter ist Klaviyo, Inc., 125 Summer Street, Boston, MA 02110, USA.</p>
+      <p>Die Anmeldung erfolgt im Double-Opt-in-Verfahren: Sie erhalten nach dem Absenden zun&auml;chst eine Best&auml;tigungs-E-Mail und m&uuml;ssen den enthaltenen Link anklicken, damit die Anmeldung wirksam wird. Erst danach erhalten Sie Zugang zur Danke-Seite mit dem kostenlosen Download (WhisperM). Klaviyo protokolliert dabei Zeitpunkt der Anmeldung und der Best&auml;tigung; diese Nachweise sollten aufbewahrt werden, um die Einwilligung im Streitfall belegen zu k&ouml;nnen.</p>
+      <p>Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Sie k&ouml;nnen die Einwilligung jederzeit &uuml;ber den Abmeldelink in jeder E-Mail widerrufen; die Daten werden dann aus der aktiven Liste entfernt bzw. auf eine Sperrliste gesetzt, um erneute Anmeldungen ohne Einwilligung zu verhindern.</p>
+      <p>Klaviyo hat sich nach eigenen Angaben dem EU-U.S. Data Privacy Framework unterworfen und setzt erg&auml;nzend EU-Standardvertragsklauseln ein.</p>
+    </div>
+  </section>
+
+  <section id="ki">
+    <div><span class="no">08</span></div>
+    <div>
+      <h2>KI-Werkzeuge bei der Verwaltung dieser Website</h2>
+      <p>Bei der Erstellung von Texten, Bildern und beim technischen Aufbau dieser Website setzen wir KI-Werkzeuge ein, insbesondere Claude von Anthropic PBC (San Francisco, USA) und ChatGPT von OpenAI (San Francisco, USA). Diese Werkzeuge erhalten in der Regel keine personenbezogenen Daten von Websitebesuchern, sondern dienen der Text- und Bilderstellung.</p>
+      <p>Eine Besonderheit: Claude ist &uuml;ber eine technische Schnittstelle (MCP) mit unserem Klaviyo-Konto verbunden, um beim Aufbau und der Pflege von E-Mail-Vorlagen und Listen zu helfen. Dadurch kann Claude im Rahmen dieser T&auml;tigkeit grunds&auml;tzlich auch auf im Klaviyo-Konto gespeicherte Kontaktdaten zugreifen, also zum Beispiel auf die E-Mail-Adressen und Vornamen, die Sie &uuml;ber das Wartelisten-Formular hinterlegt haben. Dieser Zugriff erfolgt ausschlie&szlig;lich zu internen Verwaltungs- und Einrichtungszwecken durch den Verantwortlichen selbst, nicht zu eigenen Zwecken von Anthropic.</p>
+      <p>Rechtsgrundlage ist unser berechtigtes Interesse an einer effizienten Verwaltung unserer Systeme (Art. 6 Abs. 1 lit. f DSGVO), hilfsweise die Erf&uuml;llung der Anmeldung zur Warteliste (Art. 6 Abs. 1 lit. b DSGVO).</p>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div><span class="no">09</span></div>
+    <div>
+      <h2>Kontaktaufnahme per E-Mail</h2>
+      <p>Wenn Sie uns per E-Mail (z.&nbsp;B. &uuml;ber einen mailto-Link f&uuml;r Kooperationsanfragen) kontaktieren, werden Ihre Angaben aus der Anfrage inklusive der von Ihnen angegebenen Kontaktdaten zur Bearbeitung der Anfrage und f&uuml;r m&ouml;gliche Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+      <p>Die Verarbeitung erfolgt auf Grundlage unseres berechtigten Interesses an der Beantwortung Ihrer Anfrage (Art. 6 Abs. 1 lit. f DSGVO) oder, sofern die Anfrage der Vorbereitung eines Vertrags dient, auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO.</p>
+    </div>
+  </section>
+
+  <section id="drittland">
+    <div><span class="no">10</span></div>
+    <div>
+      <h2>Datenweitergabe in die USA</h2>
+      <p>Mehrere der oben genannten Dienstleister (GitHub, Klaviyo, Anthropic, teils OpenAI) haben ihren Sitz bzw. Mutterkonzern in den USA. Die USA gelten datenschutzrechtlich nicht ohne Weiteres als sicheres Drittland. Seit 2023 erm&ouml;glicht das EU-U.S. Data Privacy Framework (DPF) die Daten&uuml;bermittlung an Unternehmen, die sich diesem Rahmen unterworfen haben und von der US-Handelsbeh&ouml;rde entsprechend gelistet sind; erg&auml;nzend werden bei den genannten Anbietern EU-Standardvertragsklauseln als Absicherung eingesetzt.</p>
+      <p>Der rechtliche Status des DPF ist im Jahr 2026 weiterhin Gegenstand politischer und gerichtlicher Auseinandersetzungen in den USA und der EU; eine hundertprozentige Garantie gibt es bei keinem der genannten Mechanismen. US-Beh&ouml;rden k&ouml;nnen unter bestimmten Voraussetzungen auf bei US-Unternehmen gespeicherte Daten zugreifen, ohne dass Betroffene in der EU dagegen im selben Umfang vorgehen k&ouml;nnen wie in der EU.</p>
+    </div>
+  </section>
+
+  <footer class="mono">
+    <span>&copy; 2026 AImazing AI</span>
+    <span><a href="index.html">Startseite</a><a href="impressum.html">Impressum</a></span>
+  </footer>
+</div>
+</body>
+</html>
